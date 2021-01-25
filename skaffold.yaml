@@ -14,6 +14,8 @@
 
 apiVersion: skaffold/v2beta11
 kind: Config
+metadata:
+  name: ledgerwriter
 build:
   artifacts:
   - image: ledgerwriter
@@ -22,3 +24,7 @@ deploy:
   kubectl:
     manifests:
     - ./ledger-writer.yaml
+profiles:
+- name: cloudbuild
+  build:
+    googleCloudBuild: {}
