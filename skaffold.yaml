@@ -12,10 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: skaffold/v2beta11
+apiVersion: skaffold/v2beta12
 kind: Config
 metadata:
   name: ledgerwriter
+requires:
+  - git:
+      repo: https://github.com/gsquared94/bank-of-anthos-ledger-db
+  - git:
+      repo: https://github.com/gsquared94/bank-of-anthos-balancereader
 build:
   artifacts:
   - image: ledgerwriter
@@ -24,7 +29,3 @@ deploy:
   kubectl:
     manifests:
     - ./ledger-writer.yaml
-profiles:
-- name: cloudbuild
-  build:
-    googleCloudBuild: {}
